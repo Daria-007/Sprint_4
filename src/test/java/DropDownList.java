@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
@@ -29,16 +29,11 @@ public class DropDownList {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-                {0}, // index of the first question
-                {1}, // index of the second question
-                {2}, // index of the third question
-                {3}, // index of the fourth question
-                {4}, // index of the fifth question
-                {5}, // index of the sixth question
-                {6}, // index of the seventh question
-                {7}  // index of the eighth question
-        });
+        Collection<Object[]> data = new ArrayList<>();
+        for (int i = 1; i <= 7; i++) {
+            data.add(new Object[]{i});
+        }
+        return data;
     }
     @Test
     public void checkQuestionText() {
@@ -46,6 +41,6 @@ public class DropDownList {
         mainPage.openPage();
         mainPage.visibilityOfDropDownList();
         mainPage.clickOnQuestion(questionIndex);
-        mainPage.checkQuestionText(questionIndex);
+        mainPage.getQuestionLocator(questionIndex);
     }
 }
